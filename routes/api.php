@@ -26,11 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //add this middleware to ensure that every request is authenticated and verity
 Route::middleware('auth:api', 'verified')->group(function () {
-    Route::post('/login', [AuthApiController::class, 'login']);
     Route::post('/logout', [AuthApiController::class, 'logout']);
 
 });
-
 
 Route::post('/register', [AuthApiController::class, 'register']);
 Route::post('/VerifyOTP', [AuthApiController::class, 'VerifyOTPCode']);

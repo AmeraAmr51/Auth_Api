@@ -48,6 +48,16 @@ class UserRequest extends FormRequest
     
             ];
             }
+            if($this->path() == "oauth/token"){
+                return [
+        
+                    //
+                        'id'=>'required|integer|exists:users,id',
+                        'otp'=>'required|string|min:4',
+                    
+        
+                ];
+                }
     }
 
     protected function failedValidation(Validator $validator)

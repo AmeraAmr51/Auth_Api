@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Models;
-
+use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\VerifyOTP;
+
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Hash;
 
@@ -58,6 +60,13 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendOTPNotification($otp)
     {
         $this->notify(new VerifyOTP($otp));
+    }
+
+    public function verifiedEmail($email)
+    {
+        $this->attributes['email']=$email;
+        $this->hasVerifiedEmail($email);
+
     }
 
 }
